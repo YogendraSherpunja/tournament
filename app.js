@@ -8,6 +8,7 @@ const protectedRoute = require('./routes/protectedRoute')
 const tournamentRouter = require("./routes/tournamentRoutes.js");
 const {verifyToken} = require("./middleware/authMiddleware")
 
+
 const app = express();
 
 const port = process.env.PORT || 8000;
@@ -24,7 +25,8 @@ app.use(session({secret: "Your secret key"}));
 app.use(express.json())
 // app.use(express.urlencoded({extended: false}))
 
-
+const cors = require("cors");
+app.use(cors());
 
 
 mongoose.connect(

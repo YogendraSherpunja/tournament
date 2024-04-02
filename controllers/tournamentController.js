@@ -60,7 +60,7 @@ const getTournament = async (req, res) => {
 }
 
 
-
+//
 const updateTournament = async (req, res) => {
     try {
        

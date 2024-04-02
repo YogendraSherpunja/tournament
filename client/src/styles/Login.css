@@ -1,0 +1,21 @@
+.form-container {
+  padding: 40px 40px 20px 40px;
+  border: 1px solid #b8b8b8;
+  border-radius: 10px;
+  width: 500px;
+  background-color: rgba(255, 255, 255, 0.92);
+  z-index: 10;
+}
+
+.form-wrapper {
+  width: 100vw;
+  height: 100vh;
+  background-image: url("https://cdn.pixabay.com/photo/2016/11/22/23/03/hardwood-1851071_1280.jpg");
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
