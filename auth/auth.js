@@ -9,6 +9,7 @@ exports.register = async (req, res, next) => {
         return res.status(400).json({ message: "Password less than 6 characters" })
       }
 
+  
     //   var bcrypt = dcodeIO.bcrypt;
 
     /** One way, can't decrypt but can compare */
@@ -25,7 +26,7 @@ exports.register = async (req, res, next) => {
         } catch (error) {
         res.status(500).json({ error: 'Registration failed' });
         }
-  }
+  } 
   exports.login = async (req, res) => {
     try {
     const { username, password } = req.body;
