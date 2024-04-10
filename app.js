@@ -6,24 +6,35 @@ var cookieParser = require('cookie-parser');
 const authRoutes = require('./routes/tournamentRoutes.js');
 const protectedRoute = require('./routes/protectedRoute')
 const tournamentRouter = require("./routes/tournamentRoutes.js");
-const {verifyToken} = require("./middleware/authMiddleware")
+const {verifyToken} = require("./middleware/authMiddleware");
+const path = require("path");
+const { fileURLToPath } = require("url");
 
 
 const app = express();
 
 const port = process.env.PORT || 8000;
 
+
+const __filename = fileURLToPath(import.meta.url);
+
+const __dirname = path.dirname(__filename);
+
 // Middleware
 
 
-app.use(express.static('./public'))
+app.use(express.static('client/build'))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(cookieParser());
 app.use(session({secret: "Your secret key"}));
 
 app.use(express.json())
-// app.use(express.urlencoded({extended: false}))
+app.get("*", (req, res) => {
+  res.sendFile(
+      path.join(__dirname, "client/build/index.html")
+  );
+});
 
 const cors = require("cors");
 app.use(cors());
