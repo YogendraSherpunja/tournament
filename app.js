@@ -16,14 +16,15 @@ const app = express();
 const port = process.env.PORT || 8000;
 
 app.use(cors());
+
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(cookieParser());
 app.use(session({secret: "Your secret key"}));
 
-app.use('/users', authRoutes);
-app.use('/protected', protectedRoute);
-app.use('/tournaments', tournamentRouter);
+app.use('/', authRoutes);
+app.use('/', protectedRoute);
+app.use('/', tournamentRouter);
 
 app.use(express.static('client/build'))
 app.use(express.json())
