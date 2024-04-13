@@ -9,26 +9,23 @@ const tournamentRouter = require("./routes/tournamentRoutes.js");
 const {verifyToken} = require("./middleware/authMiddleware");
 const path = require("path");
 const { fileURLToPath } = require("url");
-
+const cors = require("cors");
 
 const app = express();
 
 const port = process.env.PORT || 8000;
 
-
-// const __filename = fileURLToPath(import.meta.url);
-
-// const __dirname = path.dirname(__filename);
-
-// Middleware
-
-
-app.use(express.static('client/build'))
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(cookieParser());
 app.use(session({secret: "Your secret key"}));
 
+app.use('/users', authRoutes);
+app.use('/protected', protectedRoute);
+app.use('/tournaments', tournamentRouter);
+
+app.use(express.static('client/build'))
 app.use(express.json())
 app.get("*", (req, res) => {
   res.sendFile(
@@ -36,8 +33,6 @@ app.get("*", (req, res) => {
   );
 });
 
-const cors = require("cors");
-app.use(cors());
 
 
 mongoose.connect(
@@ -48,12 +43,6 @@ mongoose.connect(
 }).catch((error) =>{
   console.log('error', error.message)
 })
-
-app.use('/users', authRoutes);
-app.use('/protected', protectedRoute);
-app.use('/tournaments', tournamentRouter);
-
-app.use(tournamentRouter);
 
 app.listen(port, () => {
   console.log(`Server running on ${port}`);
